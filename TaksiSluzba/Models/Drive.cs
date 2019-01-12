@@ -26,7 +26,7 @@ namespace TaksiSluzba.Models
         /* TODO: Mušterija za koju je kreirana vožnja (samo ako mušterija inicira kreiranje vožnje)
          * Razmisliti o ovome --> "samo ako mušterija inicira kreiranje vožnje"
          */
-        public User User { get; set; }
+        public Customer Customer { get; set; }
         /* TODO: Odredište (lokacija na kojoj je vožnja uspešno završena, za ažuriranje vrednosti odgovoran je
          * vozač u trenutku kada se uspešno završi vožnja)
          * Razmisliti o ovome --> kako ovaj zahtev utice na aplikaciju?
