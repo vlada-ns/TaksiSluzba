@@ -7,5 +7,7 @@ namespace TaksiSluzba.Models
 {
     public class Dispatcher : User
     {
+        public bool EmployeeOfTheMonth { get; set; }
+
     }
 }

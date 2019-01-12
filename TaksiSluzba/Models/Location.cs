@@ -10,6 +10,7 @@ namespace TaksiSluzba.Models
         public int Id { get; set; }
         public string XCoordinate { get; set; }
         public string YCoordinate { get; set; }
+
         public Address Address { get; set; }
 
     }

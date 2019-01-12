@@ -7,7 +7,6 @@ using System.Web;
 
 namespace TaksiSluzba.Models
 {
-    // TODO: is enum best solution for CarType - enum is bad for run-time editing!
     public enum CarType {
         PassengerCar,
         Van
@@ -15,14 +14,15 @@ namespace TaksiSluzba.Models
 
     public class Car
     {
+        [ForeignKey("Driver")]
         public int Id { get; set; }
-        public Driver Driver { get; set; }
         public int Year { get; set; }
         public string RegistrationPlate { get; set; }
-
-        // TODO: property TaxiNumber is unique, does that mean it is [Required] too?
+        [Required]
         [Index(IsUnique = true)]
         public string TaxiNumber { get; set; }
         public CarType CarType { get; set; }
+
+        public Driver Driver { get; set; }
     }
 }
