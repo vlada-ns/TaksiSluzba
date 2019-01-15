@@ -32,6 +32,7 @@ namespace TaksiSluzba.Models
         // TODO: Drive LocationId to be nullable int?
         // If drive can be without location then correct type is int?
         public Location Location { get; set; }
+        [ForeignKey("Destination")]
         public int LocationId { get; set; }
 
         public CarType CarType { get; set; } = CarType.PassengerCar;
@@ -46,9 +47,9 @@ namespace TaksiSluzba.Models
          * vozač u trenutku kada se uspešno završi vožnja)
          * Razmisliti o ovome --> kako ovaj zahtev utice na aplikaciju?
         */
-        [ForeignKey("DestinationId")]
         public Location Destination { get; set; }
-        public int DestinationId { get; set; }
+        [ForeignKey("Destination")]
+        public int? DestinationId { get; set; }
     
         /* TODO: Dispečer (ako je formirao ili obradio vožnju, ako je vozač prihvatio onda je ovo polje prazno)
          * Razmisliti o ovome --> "ako je formirao ili obradio vožnju, ako je vozač prihvatio onda je ovo polje prazno"
