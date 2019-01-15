@@ -11,6 +11,7 @@ namespace TaksiSluzba.Models
     {
         [ForeignKey("Drive")]
         public int Id { get; set; }
+        [StringLength(200, MinimumLength = 2, ErrorMessage = "Field must be between 2 and 200 characters")]
         public string Description { get; set; }
         public DateTime PublicationDate { get; set; } = DateTime.Now;
 

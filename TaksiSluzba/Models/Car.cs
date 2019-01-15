@@ -17,6 +17,8 @@ namespace TaksiSluzba.Models
         [ForeignKey("Driver")]
         public int Id { get; set; }
         public int Year { get; set; }
+        [Required]
+        [StringLength(10, MinimumLength = 3, ErrorMessage = "Field must be between 3 and 10 characters")]
         public string RegistrationPlate { get; set; }
         [Required]
         [Index(IsUnique = true)]

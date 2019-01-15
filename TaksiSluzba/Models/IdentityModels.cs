@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -24,7 +25,17 @@ namespace TaksiSluzba.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Dispatcher> Dispathers { get; set; }
+        public DbSet<Drive> Drives { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<User> Users { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

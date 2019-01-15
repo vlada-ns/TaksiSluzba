@@ -40,7 +40,7 @@ namespace TaksiSluzba.Models
 
         [Required]
         [Range(1000000000000, 9999999999999, ErrorMessage = "Field must be number 13 characters long")]
-        public int JMBG { get; set; }
+        public long JMBG { get; set; }
 
         [Required]
         [StringLength(15, MinimumLength = 2, ErrorMessage = "Field must be between 2 and 15 characters")]
@@ -51,7 +51,7 @@ namespace TaksiSluzba.Models
         public string Email { get; set; }
 
         // My implemention does not require this field because I have entities Driver, Dispatcher and Customer
-        // that Inherit abstract class User. I leave this field as string, but if I must to use it, then maybe is
+        // that Inherit class User. I leave this field as string, but if I must to use it, then maybe is
         // better to be of type enum Role { Driver, Dispatcher, Customer }
         public string Role { get; set; }
 
