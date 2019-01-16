@@ -13,7 +13,7 @@ namespace TaksiSluzba.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201901161706189_initial"; }
+            get { return "201901161857438_initial"; }
         }
         
         string IMigrationMetadata.Source

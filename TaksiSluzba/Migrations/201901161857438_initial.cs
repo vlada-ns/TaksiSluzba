@@ -26,16 +26,16 @@ namespace TaksiSluzba.Migrations
                         Id = c.Int(nullable: false),
                         Year = c.Int(nullable: false),
                         RegistrationPlate = c.String(nullable: false, maxLength: 10),
-                        TaxiNumber = c.String(nullable: false),
+                        TaxiNumber = c.String(nullable: false, maxLength: 450),
                         CarType = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.Id)
+                .ForeignKey("dbo.UserTS", t => t.Id)
                 .Index(t => t.Id)
                 .Index(t => t.TaxiNumber, unique: true);
             
             CreateTable(
-                "dbo.Users",
+                "dbo.UserTS",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -56,7 +56,7 @@ namespace TaksiSluzba.Migrations
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Locations", t => t.LocationId, cascadeDelete: true)
+                .ForeignKey("dbo.Locations", t => t.LocationId)
                 .Index(t => t.Username, unique: true)
                 .Index(t => t.LocationId);
             
@@ -74,21 +74,21 @@ namespace TaksiSluzba.Migrations
                         DriverId = c.Int(nullable: false),
                         Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Status = c.Int(nullable: false),
-                        User_Id = c.Int(),
+                        UserTS_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.User_Id)
-                .ForeignKey("dbo.Users", t => t.CustomerId)
+                .ForeignKey("dbo.UserTS", t => t.UserTS_Id)
+                .ForeignKey("dbo.UserTS", t => t.CustomerId)
                 .ForeignKey("dbo.Locations", t => t.DestinationId)
                 .ForeignKey("dbo.Locations", t => t.LocationId, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.DispatcherId)
-                .ForeignKey("dbo.Users", t => t.DriverId, cascadeDelete: true)
+                .ForeignKey("dbo.UserTS", t => t.DispatcherId)
+                .ForeignKey("dbo.UserTS", t => t.DriverId, cascadeDelete: true)
                 .Index(t => t.LocationId)
                 .Index(t => t.CustomerId)
                 .Index(t => t.DestinationId)
                 .Index(t => t.DispatcherId)
                 .Index(t => t.DriverId)
-                .Index(t => t.User_Id);
+                .Index(t => t.UserTS_Id);
             
             CreateTable(
                 "dbo.Comments",
@@ -98,13 +98,13 @@ namespace TaksiSluzba.Migrations
                         Description = c.String(maxLength: 200),
                         PublicationDate = c.DateTime(nullable: false),
                         Grade = c.Int(nullable: false),
-                        User_Id = c.Int(),
+                        UserTS_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Drives", t => t.Id)
-                .ForeignKey("dbo.Users", t => t.User_Id)
+                .ForeignKey("dbo.UserTS", t => t.UserTS_Id)
                 .Index(t => t.Id)
-                .Index(t => t.User_Id);
+                .Index(t => t.UserTS_Id);
             
             CreateTable(
                 "dbo.Locations",
@@ -195,16 +195,16 @@ namespace TaksiSluzba.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Cars", "Id", "dbo.Users");
-            DropForeignKey("dbo.Users", "LocationId", "dbo.Locations");
-            DropForeignKey("dbo.Drives", "DriverId", "dbo.Users");
-            DropForeignKey("dbo.Drives", "DispatcherId", "dbo.Users");
+            DropForeignKey("dbo.Cars", "Id", "dbo.UserTS");
+            DropForeignKey("dbo.UserTS", "LocationId", "dbo.Locations");
+            DropForeignKey("dbo.Drives", "DriverId", "dbo.UserTS");
+            DropForeignKey("dbo.Drives", "DispatcherId", "dbo.UserTS");
             DropForeignKey("dbo.Drives", "LocationId", "dbo.Locations");
             DropForeignKey("dbo.Drives", "DestinationId", "dbo.Locations");
             DropForeignKey("dbo.Locations", "AddressId", "dbo.Addresses");
-            DropForeignKey("dbo.Drives", "CustomerId", "dbo.Users");
-            DropForeignKey("dbo.Comments", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.Drives", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.Drives", "CustomerId", "dbo.UserTS");
+            DropForeignKey("dbo.Comments", "UserTS_Id", "dbo.UserTS");
+            DropForeignKey("dbo.Drives", "UserTS_Id", "dbo.UserTS");
             DropForeignKey("dbo.Comments", "Id", "dbo.Drives");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
@@ -213,16 +213,16 @@ namespace TaksiSluzba.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Locations", new[] { "AddressId" });
-            DropIndex("dbo.Comments", new[] { "User_Id" });
+            DropIndex("dbo.Comments", new[] { "UserTS_Id" });
             DropIndex("dbo.Comments", new[] { "Id" });
-            DropIndex("dbo.Drives", new[] { "User_Id" });
+            DropIndex("dbo.Drives", new[] { "UserTS_Id" });
             DropIndex("dbo.Drives", new[] { "DriverId" });
             DropIndex("dbo.Drives", new[] { "DispatcherId" });
             DropIndex("dbo.Drives", new[] { "DestinationId" });
             DropIndex("dbo.Drives", new[] { "CustomerId" });
             DropIndex("dbo.Drives", new[] { "LocationId" });
-            DropIndex("dbo.Users", new[] { "LocationId" });
-            DropIndex("dbo.Users", new[] { "Username" });
+            DropIndex("dbo.UserTS", new[] { "LocationId" });
+            DropIndex("dbo.UserTS", new[] { "Username" });
             DropIndex("dbo.Cars", new[] { "TaxiNumber" });
             DropIndex("dbo.Cars", new[] { "Id" });
             DropTable("dbo.AspNetUserLogins");
@@ -233,7 +233,7 @@ namespace TaksiSluzba.Migrations
             DropTable("dbo.Locations");
             DropTable("dbo.Comments");
             DropTable("dbo.Drives");
-            DropTable("dbo.Users");
+            DropTable("dbo.UserTS");
             DropTable("dbo.Cars");
             DropTable("dbo.Addresses");
         }

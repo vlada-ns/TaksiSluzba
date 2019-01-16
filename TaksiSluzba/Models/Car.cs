@@ -22,6 +22,7 @@ namespace TaksiSluzba.Models
         public string RegistrationPlate { get; set; }
         [Required]
         [Index(IsUnique = true)]
+        [StringLength(450)]
         public string TaxiNumber { get; set; }
         public CarType CarType { get; set; }
 
