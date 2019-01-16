@@ -32,7 +32,7 @@ namespace TaksiSluzba.Models
         // TODO: Drive LocationId to be nullable int?
         // If drive can be without location then correct type is int?
         public Location Location { get; set; }
-        [ForeignKey("Destination")]
+        [ForeignKey("Location")]
         public int LocationId { get; set; }
 
         public CarType CarType { get; set; } = CarType.PassengerCar;

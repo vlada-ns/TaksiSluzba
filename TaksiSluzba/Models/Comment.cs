@@ -21,7 +21,7 @@ namespace TaksiSluzba.Models
         [Range(0, 5, ErrorMessage = "Grade must be number in range 1 - 5")]
         public int Grade { get; set; } = 0;
 
-        public User User { get; set; }
+        public UserTS UserTS { get; set; }
         public Drive Drive { get; set; }
 
     }

@@ -14,7 +14,7 @@ namespace TaksiSluzba.Models
         Other
     }
 
-    public abstract class User
+    public abstract class UserTS
     {
         public int Id { get; set; }
 

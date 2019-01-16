@@ -34,7 +34,7 @@ namespace TaksiSluzba.Models
         public DbSet<Drive> Drives { get; set; }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserTS> UserTS { get; set; }
 
         public static ApplicationDbContext Create()
         {

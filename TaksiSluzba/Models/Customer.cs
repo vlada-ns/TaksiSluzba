@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TaksiSluzba.Models
 {
-    public class Customer : User
+    public class Customer : UserTS
     {
         public bool Blocked { get; set; }
         // Number of bonus points - every drive is 1 point, after 9 colected points next drive is free

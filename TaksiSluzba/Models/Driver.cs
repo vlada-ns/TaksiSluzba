@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TaksiSluzba.Models
 {
-    public class Driver : User
+    public class Driver : UserTS
     {
         public bool Blocked { get; set; }
 
